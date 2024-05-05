@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: url('bgimage2.jpg') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(to right, #00ff00, #008000);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player:hover {
+    transform: translate(-50%, -50%) scale(1.2); 
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.7);
+}
+
+.memory {
+    position: absolute;
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.memory:hover {
+    transform: scale(1.3); 
+    transition: all 0.3s;
+}
+
+#memory1 {
+    background: radial-gradient(circle, #ff9a9e, #fad0c4); 
+    top: 20%;
+    left: 30%;
+}
+
+#memory2 {
+    background: radial-gradient(circle, #4facfe, #00f2fe); 
+    top: 20%;
+    left: 70%;
+}
+
+#memory3 {
+    background: radial-gradient(circle, #ffecd2, #fcb69f); 
+    top: 50%;
+    left: 30%;
+}
+
+#memory4 {
+    background: radial-gradient(circle, #38ef7d, #11998e); 
+    top: 50%;
+    left: 70%;
+}
+
+#memory5 {
+    background: radial-gradient(circle, #f857a6, #ff5858); 
+    top: 70%;
+    left: 50%;
+}
+
+.prompt {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; 
+    font-size: 20px; 
+    color: white; 
+    padding: 15px; 
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    border-radius: 15px; 
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3); 
+    position: absolute; 
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+.memory {
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+
+.memory-input {
+    position: absolute; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); 
+    border-radius: 15px; 
+    text-align: center; 
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2); 
+    z-index: 100; 
+}
+
+
+.memory-input h2 {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 600; 
+    font-size: 24px; 
+    color: #333; 
+    margin-bottom: 10px; 
+}
+
+.memory-input p {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 400; 
+    font-size: 18px; 
+    color: #555; 
+}
+
+.memory-input textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Montserrat', sans-serif; 
+    transition: all 0.2s; 
+}
+
+.memory-input textarea:focus {
+    border-color: #43e97b; 
+}
+
+.file-upload {
+    position: relative;
+}
+
+.file-upload input[type='file'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; 
+    cursor: pointer; 
+}
+
+.file-upload-btn {
+    background: linear-gradient(to right, #43e97b, #38f9d7);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: transform 0.2s; 
+}
+
+.file-upload-btn:hover {
+    transform: scale(1.1); 
+}
+
+.submit {
+    background: linear-gradient(to right, #ff512f, #f09819); 
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: transform 0.2s; 
+}
+
+.submit:hover {
+    transform: scale(1.1); 
+}

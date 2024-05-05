@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Lane</title>
+    <link rel="stylesheet" href="memory.css">
+    <script src="memory.js"></script>
+</head>
+<body>
+    <button id="endButton" class="top-left-button">End</button>
+    <button id="restartButton" class="top-left-button">Restart</button>
+
+
+    <div class="game-container" id="gameContainer">
+        <div id="player" class="player"></div>
+
+        <div id="memory1" class="memory" data-prompt="What makes you smile?"></div>
+        <div id="memory2" class="memory" data-prompt="What's a happy childhood memory?"></div>
+        <div id="memory3" class="memory" data-prompt="What's a song that makes you happy?"></div>
+        <div id="memory4" class="memory" data-prompt="Who is your role model?"></div>
+        <div id="memory5" class="memory" data-prompt="What's your favorite family tradition?"></div>
+    </div>
+
+    <div class="prompt" id="prompt">Move to a memory to interact</div>
+
+    <div class="memory-input" id="memoryInput" style="display: none;">
+        <div class="memory-card">
+            <h2>Memory Prompt</h2>
+            <p id="memoryQuestion"></p>
+            <textarea id="userResponse" rows="4" cols="50" placeholder="Type your response here..."></textarea>
+            
+            <div class="file-upload">
+                <button class="file-upload-btn" id="customFileBtn">Choose File</button>
+                <input type="file" id="mediaUpload" accept="image/*" />
+            </div>
+
+            <button id="submitResponse" class="submit">Submit</button>
+        </div>
+    </div>
+    <div id="tooltip" style="display: none; position: absolute; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 5px;"></div>
+</body>
+</html>

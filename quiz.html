@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro play</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <h1>Welcome to Neuro Play</h1>
+    <main>
+        <button id="startBtn">Start</button>
+        <form id="questionForm">
+            <button type="submit">Submit Answers</button>
+        </form>
+        <div id="result">
+            <h2>Your Most Expressed Emotion:</h2>
+            <p id="emotionResult"></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 BY BLUESKY TEAM MEMBERS</p>
+    <script>
+        const questions = [
+            "Can you describe a typical day in your life right now?",
+            "What challenges or obstacles are you currently facing, and how are you addressing them?",
+            "Can you share something new you've learned recently, and how has it impacted you?",
+            "How would you describe your current state of mind and emotions?",
+            "How do you handle stress and adversity in your present circumstances?",
+            "Can you share a recent moment of joy or laughter that brightened your day?",
+            "Can you describe where you see yourself in five or ten years, both personally and professionally?",
+            "Describe any future relationships or connections you hope to cultivate.",
+            "Describe any future experiences or moments you hope to cherish with your loved ones?",
+            "How do you plan to navigate conflicts and challenges in your future relationships with empathy and understanding?",
+            "Can you share any future goals or plans related to forgiveness and reconciliation in your relationships?",
+            "What is one vivid childhood memory that has stayed with you?",
+            "Reflecting on your early years, who were your closest friends, and what adventures did you share?",
+            "Describe a moment of failure or disappointment from your past and how you bounced back from it?",
+            "What was your first experience with a major life milestone, like learning to ride a bike or driving a car?",
+            "Reflect on a time when you faced a fear or overcame a personal challenge."
+        ];
+
+        const startBtn = document.getElementById('startBtn');
+        const questionForm = document.getElementById('questionForm');
+        const resultDiv = document.getElementById('result');
+        const emotionResult = document.getElementById('emotionResult');
+        const videoFeed = document.getElementById('videoFeed'); 
+
+        startBtn.addEventListener('click', function() {
+            startBtn.style.display = 'none';
+            questionForm.style.display = 'block';
+            fadeIn(questionForm);
+            showQuestions();
+            startVideo();
+        });
+
+        questionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            analyzeEmotions(); 
+        });
+
+        function showQuestions() {
+            const form = document.getElementById('questionForm');
+            const selectedQuestions = getRandomQuestions(3); 
+            selectedQuestions.forEach((question, index) => {
+                const label = document.createElement('label');
+                label.textContent = question;
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'answer' + (index + 1);
+
+                form.appendChild(label);
+                form.appendChild(input);
+            });
+        }
+
+        function getRandomQuestions(num) {
+            const shuffled = questions.sort(() => Math.random() - 0.5); 
+            return shuffled.slice(0, num); 
+        }
+
+        function analyzeEmotions() {
+            const keywords = {
+                'Happy': ['joy', 'happy', 'laughter', 'smile', 'delight', 'excited', 'cheerful', 'content', 'satisfied', 'euphoria', 'blissful', 'radiant', 'exuberant', 'festive', 'jubilant', 'buoyant', 'gratified', 'enchanted', 'jovial', 'animated', 'chipper', 'euphoric', 'vivacious', 'zestful', 'chirpy', 'elation'],
+        'Sad': ['lonely', 'hurt', 'sad', 'empty', 'alone', 'lost', 'broken', 'grief', 'tears', 'pain', 'despondent', 'forlorn', 'woeful', 'crestfallen', 'disheartened', 'inconsolable', 'dismal', 'lugubrious', 'wistful', 'pensive', 'melancholic', 'sullen', 'downcast', 'morose', 'heartrending', 'blue', 'low', 'bleak', 'dreary', 'teary', 'grim', 'glum', 'moody', 'weepy'],
+        'Angry': ['anger', 'angry', 'rage', 'frustration', 'irritated', 'mad', 'furious', 'annoyed', 'resentment', 'incensed', 'ireful', 'wrathful', 'incandescent', 'tempestuous', 'turbulent', 'irascible', 'choleric', 'antagonized', 'irked', 'fuming', 'seething', 'enraged', 'inflamed', 'infuriated', 'agitated', 'vexed', 'grouchy', 'grumpy'],
+        'Fear': ['fear', 'scared', 'afraid', 'anxious', 'terrified', 'panic', 'dread', 'phobia', 'threatened', 'apprehensive', 'nervous', 'alarmed', 'petrified', 'horrified', 'paranoid', 'intimidated', 'uneasy', 'trepidation', 'phobic', 'jittery', 'timorous', 'trepidatious', 'agoraphobic', 'chickenhearted', 'frightened', 'horror-stricken', 'shivery', 'panicky', 'scaredy-cat', 'terror-stricken', 'jumpy', 'spooky', 'startled', 'timid', 'shaky', 'fretful'],
+        'Disgust': ['disgust', 'disgusted', 'revulsion', 'repulsion', 'nausea', 'abhorrence', 'aversion', 'contempt', 'abomination', 'loathing', 'repugnant', 'nauseous', 'queasy', 'odious', 'loathsome', 'repellent', 'offensive', 'foul', 'sickening', 'distasteful', 'vile', 'detestable', 'gross', 'icky', 'yucky'],
+        'Surprised': ['surprise', 'surprised', 'astonished', 'amazed', 'shock', 'startled', 'stunned', 'bewildered', 'dazed', 'flabbergasted', 'incredulous', 'confounded', 'thunderstruck', 'open-mouthed', 'awestruck', 'gobsmacked', 'speechless', 'stupefied']
+            };
+
+            const answers = document.querySelectorAll('input[type="text"]');
+            const emotionsCount = {};
+
+            answers.forEach(answer => {
+                const text = answer.value.toLowerCase();
+                Object.keys(keywords).forEach(emotion => {
+                    keywords[emotion].forEach(keyword => {
+                        if (text.includes(keyword)) {
+                            emotionsCount[emotion] = (emotionsCount[emotion] || 0) + 1;
+                        }
+                    });
+                });
+            });
+
+            let mostExpressedEmotion = 'Neutral';
+            let maxCount = 0;
+            Object.keys(emotionsCount).forEach(emotion => {
+                if (emotionsCount[emotion] > maxCount) {
+                    mostExpressedEmotion = emotion;
+                    maxCount = emotionsCount[emotion];
+                }
+            });
+
+            displayResult(mostExpressedEmotion);
+        }
+
+        function displayResult(emotion) {
+            resultDiv.style.display = 'block';
+            emotionResult.textContent = emotion;
+            fadeIn(resultDiv);
+            setTimeout(function() {
+                window.location.href = 'emotion_detect.html'; 
+            }, 2000);
+        }
+
+        function fadeIn(element) {
+            let opacity = 0;
+            const fadeInInterval = setInterval(function() {
+                if (opacity < 1) {
+                    opacity += 0.1;
+                    element.style.opacity = opacity;
+                } else {
+                    clearInterval(fadeInInterval);
+                }
+            }, 50);
+        }
+
+    </script>
+</body>
+</html>
