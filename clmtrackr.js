@@ -1,18 +1,4 @@
-/**
- * clmtrackr library (https://www.github.com/auduno/clmtrackr/)
- *
- * Copyright (c) 2013, Audun Mathias Øygard
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 "use strict";
-//requires: ccv.js, numeric.js
-
 var clm = {
 	tracker : function(params) {
 		
@@ -48,13 +34,7 @@ var clm = {
 		var responseList = ['raw'];
 		var responseIndex = 0;
 		
-		/*
-		It's possible to experiment with the sequence of variances used for the finding the maximum in the KDE.
-		This sequence is pretty arbitrary, but was found to be okay using some manual testing.
-		*/
 		var varianceSeq = [10,5,1];
-		//var varianceSeq = [3,1.5,0.75];
-		//var varianceSeq = [6,3,0.75];
 		var PDMVariance = 0.7;
 		
 		var relaxation = 0.1;
@@ -85,7 +65,6 @@ var clm = {
 		var webglFi, svmFi, mosseCalc;
 
 		var scoringCanvas = document.createElement('canvas');
-		//document.body.appendChild(scoringCanvas);
 		var scoringContext = scoringCanvas.getContext('2d');
 		var msxmin, msymin, msxmax, msymax;
 		var msmodelwidth, msmodelheight;
